@@ -2,13 +2,13 @@ Portfolio Julie Gredoire
 
 Bienvenue sur mon portfolio en ligne ! Ce projet présente mon parcours académique, mes expériences professionnelles, mes compétences techniques et mes projets réalisés dans le cadre de mon Bachelor Universitaire de Technologie en Réseaux et Télécommunications à l'IUT de Villetaneuse, Université Sorbonne Paris Nord.
 
-📝 Description
+Description
 
 Ce portfolio présente les projets que j'ai réalisés tout au long de mon cursus. Il inclut des projets en Réseaux et Télécommunications, ainsi que mes compétences en gestion de projet, cybersécurité, et développement web.
 
 Le site contient également des informations sur mes expériences professionnelles, mes compétences techniques, et mes passions, avec des liens vers des projets externes comme GitHub et des vidéos de présentation.
 
-💻 Technologies utilisées
+Technologies utilisées
 
 HTML5
 
@@ -24,7 +24,7 @@ VS Code (IDE de développement)
 
 Linux / Ubuntu
 
-🚀 Fonctionnalités
+Fonctionnalités
 
 Page d’accueil : Présentation générale de mes objectifs professionnels, de mes compétences et de mon parcours.
 
@@ -34,7 +34,7 @@ Compétences : Description détaillée de mes compétences techniques en réseau
 
 Contact : Formulaire de contact et informations pour me joindre.
 
-📄 Structure du projet
+Structure du projet
 
 Le portfolio est structuré comme suit :
 
@@ -65,11 +65,11 @@ Ouvrez le dossier dans votre éditeur préféré (par exemple, VS Code).
 
 Pour visualiser le portfolio localement, il vous suffit d’ouvrir le fichier index.html dans un navigateur.
 
-⚙️ Configuration
+Configuration
 
 Aucune configuration supplémentaire n'est nécessaire pour utiliser ce portfolio. Si vous souhaitez personnaliser le site (ajouter vos propres informations ou projets), vous pouvez facilement modifier le contenu des fichiers HTML, CSS, et JavaScript.
 
-🧑‍💻 Contribuer
+Contribuer
 
 Si vous souhaitez contribuer à ce projet, vous pouvez :
 
@@ -79,13 +79,12 @@ Créer une branche de développement.
 
 Soumettre une pull request avec vos changements.
 
-🔗 Liens externes
+Liens externes
 
 Mon LinkedIn : Lien LinkedIn
 
 Mon GitHub : Lien GitHub
 
-📧 Contact
+Contact
 
-Pour toute question ou opportunité, vous pouvez me contacter par email :
-📧 juliegredoire@example.com
+Pour toute question ou opportunité, vous pouvez me contacter par email : juliegredoire@example.com
