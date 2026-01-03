@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact – Julie Gredoire</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+
+<header>
+    <nav class="navbar">
+        <div class="logo">Julie Gredoire</div>
+
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="skills.html">Skills</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="experience.html">Experience</a></li>
+            <li><a href="contact.html" class="active">Contact</a></li>
+        </ul>
+
+        <div class="lang-switch">
+            <a class="lang" href="../fr/contact.html">FR</a>
+            <span>|</span>
+            <a class="lang active" href="../en/contact.html">EN</a>
+        </div>
+    </nav>
+</header>
+
+<section class="page-section contact">
+    <h1>Contact me</h1>
+    <p>
+        Feel free to contact me for any question, project or opportunity.
+    </p>
+
+    <div class="contact-layout">
+
+        <div class="contact-info">
+            <div class="contact-card">
+                <h2>Details</h2>
+                <ul>
+                    <li>
+                        <span class="contact-label">Email</span><br>
+                        <a href="mailto:julie.gredoire@gmail.com">julie.gredoire@gmail.com</a>
+                    </li>
+                    <li>
+                        <span class="contact-label">LinkedIn</span><br>
+                        <a href="https://www.linkedin.com/in/julie-gredoire" target="_blank" rel="noopener">LinkedIn profile</a>
+                    </li>
+                    <li>
+                        <span class="contact-label">GitHub</span><br>
+                        <a href="https://github.com/Churri95" target="_blank" rel="noopener">My GitHub</a>
+                    </li>
+                    <li>
+                        <span class="contact-label">Location</span><br>
+                        Île-de-France – France
+                    </li>
+                </ul>
+            </div>
+
+            <div class="contact-card">
+                <h2>Interests</h2>
+                <p>I’m interested in:</p>
+                <ul>
+                    <li>Networking & Telecommunications</li>
+                    <li>Cybersecurity & infrastructures</li>
+                    <li>Project work & organisation</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="contact-form-wrapper">
+            <div class="contact-card">
+                <h2>Contact form</h2>
+
+                <p class="form-note">
+                    The information submitted through this form is used only to reply to your message.
+                </p>
+
+                <form class="contact-form"
+                      action="https://formspree.io/f/TON_ID"
+                      method="POST">
+
+                    <input type="hidden" name="_next" value="../en/thanks.html">
+                    <input type="text" name="_gotcha" style="display:none">
+
+                    <div class="form-group">
+                        <label for="name">Full name</label>
+                        <input type="text" id="name" name="name" placeholder="Your name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email address</label>
+                        <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="5" placeholder="Your message..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-primary">
+                        Send message
+                    </button>
+
+                    <p class="form-note" style="margin-top: 1rem;">
+                        By submitting this form, you agree that I may contact you by email.
+                        See <a href="legal.html">Legal notice & Privacy</a>.
+                    </p>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<footer>
+    <p>© 2025 – Julie Gredoire Portfolio</p>
+    <p><a href="legal.html">Legal notice & Privacy</a></p>
+</footer>
+
+<script src="../script.js"></script>
+</body>
+</html>
