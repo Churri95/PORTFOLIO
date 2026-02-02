@@ -104,3 +104,31 @@
 
   elements.forEach((el) => observer.observe(el));
 })();
+
+
+/* =========================================
+4) Carroussel photos défilement fluide
+========================================= */
+
+const track = document.querySelector(".gallery-track");
+const slides = document.querySelectorAll(".gallery-track img");
+const prevBtn = document.querySelector(".gallery-btn.prev");
+const nextBtn = document.querySelector(".gallery-btn.next");
+
+let index = 0;
+
+function updateGallery(){
+  track.style.transform = `translateX(-${index * 100}%)`;
+}
+
+nextBtn.addEventListener("click", () => {
+  index = (index + 1) % slides.length;
+  updateGallery();
+});
+
+prevBtn.addEventListener("click", () => {
+  index = (index - 1 + slides.length) % slides.length;
+  updateGallery();
+});
+
+
