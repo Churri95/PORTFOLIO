@@ -25,8 +25,8 @@
   --container: 1100px;
 
   /* Halo */
-  --glow-size: 220px;
-  --glow-blur: 70px;
+  --glow-size: 240px;
+  --glow-blur: 75px;
   --glow-opacity: .16;
 }
 
@@ -36,11 +36,11 @@ html,body{ height:100%; }
 body{
   margin:0;
   min-height:100vh;
-  color: rgba(255,255,255,.92);
+  color: var(--text);
   font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
-  background-color: #070A10;
+  background-color: var(--bg-0);
 
-  /* Fond continu (pas de coupure) */
+  /* Fond continu sans “coupure” */
   background-image:
     radial-gradient(1100px 650px at 12% 12%, rgba(124,92,255,.18), transparent 60%),
     radial-gradient(900px 580px at 88% 22%, rgba(156,133,255,.14), transparent 62%),
@@ -50,11 +50,10 @@ body{
   background-attachment: fixed;
 }
 
-
 a{ color:inherit; text-decoration:none; }
 a:hover{ text-decoration:underline; }
 
-p{ line-height:1.65; color:var(--muted); margin:0.6rem 0; }
+p{ line-height:1.65; color:var(--muted); margin:.6rem 0; }
 
 h1,h2,h3,h4{
   margin:0 0 .65rem;
@@ -73,14 +72,17 @@ img{ max-width:100%; display:block; }
    CURSOR GLOW
 ========================= */
 .cursor-glow{
-  position:fixed;
-  inset:auto auto 0 0;
-  width:var(--glow-size);
-  height:var(--glow-size);
-  transform: translate(-50%,-50%);
-  border-radius:999px;
-  pointer-events:none;
-  z-index:0;
+  position: fixed;
+  width: var(--glow-size);
+  height: var(--glow-size);
+  border-radius: 999px;
+  pointer-events: none;
+  z-index: 0;
+
+  /* Le halo doit suivre EXACTEMENT le curseur:
+     le JS doit mettre left/top sur la position souris */
+  transform: translate(-50%, -50%);
+
   background: radial-gradient(circle at center,
     rgba(124,92,255,var(--glow-opacity)) 0%,
     rgba(124,92,255,.10) 35%,
@@ -89,253 +91,245 @@ img{ max-width:100%; display:block; }
   filter: blur(var(--glow-blur));
 }
 
-/* Assure que le contenu est au-dessus */
+/* Assure que le contenu est au-dessus du glow */
 header, main, section, footer{
-  position:relative;
-  z-index:1;
+  position: relative;
+  z-index: 1;
 }
 
 /* =========================
-   NAVBAR (corrigée : espacement + wrap)
+   NAVBAR
 ========================= */
 header{
-  position:sticky;
-  top:0;
-  z-index:50;
+  position: sticky;
+  top: 0;
+  z-index: 50;
   background: rgba(10,12,18,.65);
   backdrop-filter: blur(12px);
-  border-bottom:1px solid var(--border);
+  border-bottom: 1px solid var(--border);
 }
 
-/* ===== NAVBAR ===== */
-.navbar {
+.navbar{
   max-width: 1300px;
   margin: 0 auto;
-  padding: 1.2rem 2rem;
+  padding: 1.05rem 2rem;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   gap: 2rem;
 }
 
-/* Logo */
-.logo {
-  font-weight: 600;
+.logo{
+  font-weight: 650;
   white-space: nowrap;
+  color: rgba(255,255,255,.92);
 }
 
-/* Liens centraux */
-.nav-links {
+.nav-links{
   display: flex;
   align-items: center;
-  gap: 2rem;
-
+  gap: 1.25rem;
   list-style: none;
   margin: 0;
   padding: 0;
 
-  white-space: nowrap;   /* 🔑 empêche le retour à la ligne */
-flex: 1;
-justify-content: center;
+  flex: 1;
+  justify-content: center;
+  white-space: nowrap;
 }
 
-/* Liens */
-.nav-links a {
-text-decoration: none;
-color: #e5e7eb;
-font-size: 0.95rem;
-position: relative;
-padding: 0.4rem 0.8rem;
-border-radius: 999px;
-transition: background 0.25s ease, color 0.25s ease;
+.nav-links a{
+  text-decoration: none;
+  color: rgba(229,231,235,.95);
+  font-size: 0.95rem;
+
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  transition: background .25s ease, color .25s ease, transform .15s ease;
 }
 
 .nav-links a:hover,
-.nav-links a.active {
-background: rgba(124, 92, 255, 0.15);
-color: #fff;
+.nav-links a.active{
+  background: rgba(124,92,255,.15);
+  color: #fff;
+  text-decoration: none;
 }
 
-/* Lang switch */
-.lang-switch {
-display: flex;
-align-items: center;
-gap: 0.5rem;
-white-space: nowrap;
+.lang-switch{
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  white-space: nowrap;
 }
 
-.lang-switch a {
-text-decoration: none;
-font-size: 0.85rem;
-padding: 0.35rem 0.7rem;
-border-radius: 999px;
-color: #c7c9ff;
-transition: background 0.25s ease;
+.lang-switch a{
+  text-decoration: none;
+  font-size: .85rem;
+  padding: .35rem .7rem;
+  border-radius: 999px;
+  color: #c7c9ff;
+  transition: background .25s ease, color .25s ease;
 }
 
 .lang-switch a.active,
-.lang-switch a:hover {
-background: rgba(124, 92, 255, 0.2);
-color: #fff;
+.lang-switch a:hover{
+  background: rgba(124,92,255,.20);
+  color: #fff;
+  text-decoration: none;
 }
 
-
 /* =========================
-SECTIONS / CONTAINER
--> corrige l’effet “tout collé” sur toutes pages
+   SECTIONS / CONTAINER
 ========================= */
 .page-section,
 .hero{
-width:100%;
-padding: 3.2rem 1.2rem;
+  width: 100%;
+  padding: 3.2rem 1.2rem;
 }
 
 .page-section{
-max-width: var(--container);
-margin: 0 auto;
+  max-width: var(--container);
+  margin: 0 auto;
 }
 
 .page-section > p:first-of-type{
-margin-top: .2rem;
+  margin-top: .25rem;
 }
 
 .page-section h1{
-margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 
 .page-section h2{
-margin-top: 2.2rem;
+  margin-top: 2.2rem;
 }
 
 /* =========================
-HERO (centrage)
+   HERO (Accueil)
 ========================= */
 .hero{
-min-height: calc(100vh - 84px); /* approx navbar */
-display:flex;
-align-items:center;
+  min-height: calc(100vh - 80px);
+  display: flex;
+  align-items: center;
 }
 
 .hero-inner{
-max-width: var(--container);
-margin: 0 auto;
-width:100%;
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap: 4rem;
+  max-width: var(--container);
+  margin: 0 auto;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4rem;
 }
 
-.hero-text{
-max-width: 560px;
-}
+.hero-text{ max-width: 560px; }
 
 .btn-row{
-display:flex;
-gap: .8rem;
-flex-wrap:wrap;
-margin-top: 1.35rem;
+  display: flex;
+  gap: .8rem;
+  flex-wrap: wrap;
+  margin-top: 1.35rem;
 }
 
 .btn-primary, .btn-secondary{
-display:inline-flex;
-align-items:center;
-justify-content:center;
-padding:.85rem 1.05rem;
-border-radius:999px;
-border:1px solid transparent;
-font-weight:600;
-text-decoration:none;
-transition: transform 120ms ease, background 120ms ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: .85rem 1.05rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-weight: 650;
+  text-decoration: none;
+  transition: transform 120ms ease, background 120ms ease, box-shadow 120ms ease;
 }
 
 .btn-primary{
-background: linear-gradient(135deg, var(--primary), var(--primary2));
-color:#fff;
-box-shadow: 0 10px 22px rgba(124,92,255,.22);
+  background: linear-gradient(135deg, var(--primary), var(--primary2));
+  color: #fff;
+  box-shadow: 0 10px 22px rgba(124,92,255,.22);
 }
-.btn-primary:hover{ transform: translateY(-1px); text-decoration:none; }
+
+.btn-primary:hover{
+  transform: translateY(-1px);
+  text-decoration: none;
+  box-shadow: 0 14px 30px rgba(124,92,255,.28);
+}
 
 .btn-secondary{
-background: rgba(255,255,255,.06);
-border-color: rgba(255,255,255,.14);
-color: rgba(255,255,255,.90);
+  background: rgba(255,255,255,.06);
+  border-color: rgba(255,255,255,.14);
+  color: rgba(255,255,255,.90);
 }
-.btn-secondary:hover{ background: rgba(255,255,255,.09); transform: translateY(-1px); text-decoration:none; }
+
+.btn-secondary:hover{
+  background: rgba(255,255,255,.09);
+  transform: translateY(-1px);
+  text-decoration: none;
+}
 
 .btn-small{
-font-size: 0.85rem;
-padding: 0.45rem 0.9rem;
-border-radius: 999px;
-display: inline-block;
-margin: 0.8rem 0 0.6rem;
+  font-size: .85rem;
+  padding: .45rem .9rem;
+  border-radius: 999px;
+  display: inline-flex;
+  margin: .8rem 0 .6rem;
 }
 
-
-/* Photo */
 .hero-photo{
-display:flex;
-align-items:center;
-justify-content:center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
 .profile-photo{
-width: min(320px, 78vw);
-aspect-ratio: 1/1;
-object-fit: cover;
-border-radius: 999px;
-border: 1px solid rgba(255,255,255,.14);
-box-shadow: var(--shadow);
-background: rgba(255,255,255,.04);
+  width: min(320px, 78vw);
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.14);
+  box-shadow: var(--shadow);
+  background: rgba(255,255,255,.04);
 }
 
 /* =========================
-CARDS / GRIDS
--> corrige le bug de titres qui se superposent
+   GRIDS / CARDS (global)
 ========================= */
 .skills-grid,
 .projects-grid,
 .experience-section,
 .passions-grid,
 .contact-layout{
-margin-top: 1rem;
+  margin-top: 1rem;
 }
 
 .skills-grid{
-display:grid;
-grid-template-columns: repeat(3, minmax(0, 1fr)); /* IMPORTANT */
-gap: 1rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
 }
 
-.projects-grid {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-    gap: 32px;
-    align-items: start; /* 🔥 clé : chaque carte garde sa hauteur naturelle */
+.projects-grid{
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 32px;
+  align-items: start;
 }
-
 
 .experience-section{
-display:grid;
-grid-template-columns: repeat(2, minmax(0, 1fr));
-gap: 1.1rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.1rem;
 }
 
 .passions-grid{
-display:grid;
-grid-template-columns: repeat(2, minmax(0, 1fr));
-gap: 1rem;
-}
-
-/* Contact */
-.contact-layout{
-display:grid;
-grid-template-columns: 0.9fr 1.1fr;
-gap: 1.2rem;
-align-items:start;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
 }
 
 /* Cards */
@@ -344,134 +338,298 @@ align-items:start;
 .experience-card,
 .passion-card,
 .contact-card,
-.about-card{
-background: var(--card);
-border:1px solid var(--border);
-border-radius: var(--radius);
-padding: 1.2rem;
-box-shadow: var(--shadow-soft);
-overflow: hidden;
+.about-card,
+.photo-gallery{
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.2rem;
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
 }
 
-
-/* Corrige les h2 trop “massifs” / superposés */
+/* Titres de sections skills (évite les énormes titres qui cassent la grille) */
 .skill-title{
-display:block;
-width:100%;
-text-align:left;
-margin: 2.2rem 0 1rem;
-padding: 0;
-  position: static;      /* IMPORTANT */
-z-index: auto;
-  max-width: 70ch;       /* évite les titres qui prennent toute la page */
+  display: block;
+  width: 100%;
+  text-align: left;
+  margin: 2.2rem 0 1rem;
+  padding: 0;
+  position: static;
+  max-width: 70ch;
 }
 
-/* About */
-.about-layout{
-display:grid;
-grid-template-columns: 1.2fr 0.8fr;
-gap: 1.4rem;
-align-items:start;
-}
-
-/* Experience header */
-.experience-header{
-display:flex;
-align-items:center;
-gap:.8rem;
-margin-bottom:.6rem;
-}
-
-.experience-logo{
-  width:44px; height:44px;
-  object-fit:contain;
-  border-radius: 12px;
-  background: rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.12);
-  padding: 6px;
-}
-
-/* Tags */
+/* =========================
+   TAGS / PILLS
+========================= */
 .tag-pill{
-  display:inline-flex;
-  align-items:center;
-  padding:.35rem .65rem;
-  border-radius:999px;
+  display: inline-flex;
+  align-items: center;
+  padding: .35rem .65rem;
+  border-radius: 999px;
   background: rgba(255,255,255,.06);
   border: 1px solid rgba(255,255,255,.12);
   color: rgba(255,255,255,.88);
-  font-size:.9rem;
+  font-size: .9rem;
 }
 
 .project-tags{
-  display:flex;
-  flex-wrap:wrap;
-  gap:.55rem;
-  margin-top:.7rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem;
+  margin-top: .7rem;
 }
 
-/* Contact form */
+/* (tag carré utilisé dans À propos “Profil rapide”) */
+.tag{
+  display: inline-flex;
+  align-items: center;
+  padding: .2rem .55rem;
+  border-radius: 999px;
+  background: rgba(124,92,255,.14);
+  border: 1px solid rgba(124,92,255,.22);
+  color: rgba(255,255,255,.92);
+  font-weight: 650;
+  font-size: .85rem;
+  margin-right: .35rem;
+}
+
+/* =========================
+   EXPERIENCE header
+========================= */
+.experience-header{
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  margin-bottom: .6rem;
+}
+
+.experience-logo{
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  border-radius: 12px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.12);
+  padding: 6px;
+}
+
+/* =========================
+   CONTACT (plus premium / espacé)
+========================= */
+.page-section.contact{
+  padding-top: 3.6rem;
+  padding-bottom: 3.6rem;
+}
+
+.contact-layout{
+  display: grid;
+  grid-template-columns: 0.92fr 1.08fr;
+  gap: 1.8rem;
+  align-items: start;
+  margin-top: 1.6rem;
+}
+
+.contact-info{
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.contact-form-wrapper{
+  display: flex;
+}
+
+.page-section.contact > p{
+  max-width: 70ch;
+  margin-top: 0;
+  margin-bottom: 1.2rem;
+}
+
+.contact-card{
+  padding: 1.35rem;
+}
+
+.contact-card ul{
+  margin: .6rem 0 0;
+  padding-left: 1.1rem;
+}
+
+.contact-card li{
+  margin: .45rem 0;
+  color: rgba(255,255,255,.78);
+}
+
+/* Form */
 .contact-form{
-  margin-top:.9rem;
-  display:grid;
-  gap:.9rem;
+  margin-top: .9rem;
+  display: grid;
+  gap: 1rem;
 }
+
+.form-note{
+  margin-top: .9rem;
+  font-size: .92rem;
+  color: rgba(255,255,255,.66);
+  line-height: 1.55;
+}
+
 .form-group label{
-  display:block;
-  font-weight:700;
+  display: block;
+  font-weight: 700;
   color: rgba(255,255,255,.88);
-  margin-bottom:.35rem;
+  margin-bottom: .35rem;
 }
+
 input, textarea{
-  width:100%;
-  padding:.85rem .9rem;
+  width: 100%;
+  padding: .85rem .9rem;
   border-radius: 14px;
-  border:1px solid rgba(255,255,255,.14);
+  border: 1px solid rgba(255,255,255,.14);
   background: rgba(10,12,18,.55);
   color: rgba(255,255,255,.92);
-  outline:none;
+  outline: none;
 }
+
 input:focus, textarea:focus{
   border-color: rgba(124,92,255,.55);
   box-shadow: 0 0 0 4px rgba(124,92,255,.14);
 }
 
-/* Legal */
+.contact-form .btn-primary{
+  width: 100%;
+  margin-top: .2rem;
+  padding: .95rem 1.1rem;
+}
+
+/* =========================
+   ABOUT (À propos) + GALERIE
+========================= */
+.about-layout{
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+/* Colonne droite : espace entre Profil rapide et Photos */
+.about-side{
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+/* Galerie : plus “longue” + flèches mieux placées */
+.photo-gallery{
+  position: relative;
+  width: 100%;
+  padding: 1rem;
+  border-radius: var(--radius);
+}
+
+.photo-gallery h3{
+  margin-bottom: .8rem;
+}
+
+.gallery-wrapper{
+  overflow: hidden;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(0,0,0,.20);
+}
+
+/* Hauteur fixe + centrage des images (toutes cadrées pareil) */
+.gallery-track{
+  display: flex;
+  transition: transform 0.45s ease;
+  will-change: transform;
+}
+
+.gallery-track img{
+  width: 100%;
+  flex: 0 0 100%;
+  height: 360px;            /* ⬅️ plus grand en “longueur” */
+  object-fit: cover;
+  object-position: center;  /* ⬅️ centrage pour tailles différentes */
+  border-radius: 14px;
+}
+
+/* Flèches : visibles + pas collées à l’image */
+.gallery-btn{
+  position: absolute;
+  top: 56%;
+  transform: translateY(-50%);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.10);
+  cursor: pointer;
+
+  background: rgba(0,0,0,.35);
+  color: rgba(255,255,255,.92);
+  font-size: 24px;
+  line-height: 0;
+
+  display: grid;
+  place-items: center;
+
+  box-shadow: 0 10px 25px rgba(0,0,0,.35);
+  backdrop-filter: blur(10px);
+  transition: transform .12s ease, background .2s ease, opacity .2s ease;
+}
+
+.gallery-btn:hover{
+  background: rgba(124,92,255,.35);
+  transform: translateY(-50%) scale(1.03);
+}
+
+.gallery-btn.prev{ left: 14px; }
+.gallery-btn.next{ right: 14px; }
+
+/* Accessibilité focus clavier */
+.gallery-btn:focus{
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(124,92,255,.18), 0 10px 25px rgba(0,0,0,.35);
+}
+
+/* =========================
+   LEGAL
+========================= */
 .legal h2{ margin-top: 1.4rem; }
 .legal h3{ margin-top: 1.0rem; }
 .legal ul{
-  margin:.8rem 0 0;
+  margin: .8rem 0 0;
   padding-left: 1.1rem;
   color: var(--muted);
 }
 
 /* =========================
-   FOOTER (toujours en bas)
+   FOOTER
 ========================= */
 footer{
-  margin-top:auto;
+  margin-top: auto;
   padding: 1.6rem 1.2rem;
-  border-top:1px solid var(--border);
+  border-top: 1px solid var(--border);
   background: rgba(10,12,18,.55);
   backdrop-filter: blur(10px);
-  text-align:center;
+  text-align: center;
 }
 
 footer p{
-  margin:.25rem 0;
+  margin: .25rem 0;
   color: rgba(255,255,255,.70);
 }
 
 /* =========================
-   REVEAL (si tu utilises le JS)
+   REVEAL (si utilisé par JS)
 ========================= */
 .reveal{
-  opacity:0;
+  opacity: 0;
   transform: translateY(10px);
   transition: opacity 300ms ease, transform 300ms ease;
 }
 .reveal--visible{
-  opacity:1;
+  opacity: 1;
   transform: translateY(0);
 }
 
@@ -485,13 +643,14 @@ footer p{
 @media (max-width: 980px){
   .hero-inner{
     flex-direction: column-reverse;
-    text-align:center;
+    text-align: center;
     gap: 2.5rem;
   }
-  .btn-row{ justify-content:center; }
+
+  .btn-row{ justify-content: center; }
 
   .about-layout{ grid-template-columns: 1fr; }
-  .contact-layout{ grid-template-columns: 1fr; }
+  .contact-layout{ grid-template-columns: 1fr; gap: 1.4rem; }
 
   .projects-grid{ grid-template-columns: 1fr; }
   .experience-section{ grid-template-columns: 1fr; }
@@ -500,17 +659,24 @@ footer p{
 
   .navbar{
     justify-content: center;
+    gap: 1.2rem;
   }
+
   .nav-links{
     justify-content: center;
+    flex-wrap: wrap; /* si manque de place */
+    row-gap: .4rem;
+  }
+
+  .gallery-track img{
+    height: 320px;
   }
 }
 
 @media (max-width: 520px){
-  .nav-links{
-    gap: .45rem;
-  }
-  .nav-links a{
-    padding: .5rem .65rem;
-  }
+  .navbar{ padding: .95rem 1rem; }
+  .nav-links{ gap: .45rem; }
+  .nav-links a{ padding: .45rem .6rem; }
+  .gallery-btn{ width: 40px; height: 40px; }
+  .gallery-track img{ height: 280px; }
 }
